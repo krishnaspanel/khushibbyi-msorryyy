@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Meri Pyari Khushi ❤️</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    font-family: 'Georgia', serif;
+    color: #fff;
+    overflow-x: hidden;
+    background: linear-gradient(-45deg, #1a0025, #3d0a2f, #6b0f3a, #2a0033);
+    background-size: 400% 400%;
+    animation: gradientMove 14s ease infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  @keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* floating hearts */
+  .hearts {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .heart {
+    position: absolute;
+    bottom: -40px;
+    color: rgba(255, 120, 170, 0.75);
+    font-size: 24px;
+    animation: floatUp linear infinite;
+    filter: drop-shadow(0 0 6px rgba(255, 105, 180, 0.6));
+  }
+
+  @keyframes floatUp {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 0;
+    }
+    10% { opacity: 1; }
+    100% {
+      transform: translateY(-110vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  .card {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    width: 100%;
+    background: rgba(20, 0, 25, 0.55);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 182, 213, 0.35);
+    border-radius: 28px;
+    padding: 42px 30px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+    animation: cardIn 1.2s ease-out;
+  }
+
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(24px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  h1 {
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    margin-bottom: 8px;
+    color: #ffd6e8;
+    text-shadow: 0 0 22px rgba(255, 105, 180, 0.55);
+  }
+
+  .subtitle {
+    color: #ffb3d1;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    margin-bottom: 26px;
+  }
+
+  .message {
+    font-size: clamp(1rem, 2.5vw, 1.18rem);
+    line-height: 1.85;
+    color: #ffeaf4;
+    margin-bottom: 28px;
+  }
+
+  .message p { margin-bottom: 14px; }
+
+  .signature {
+    font-style: italic;
+    color: #ffc2dc;
+    margin-top: 6px;
+  }
+
+  .music-box {
+    margin-top: 12px;
+    padding: 18px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 182, 213, 0.25);
+  }
+
+  .music-label {
+    font-size: 0.9rem;
+    color: #ffc2dc;
+    margin-bottom: 10px;
+  }
+
+  audio {
+    width: 100%;
+    accent-color: #ff4fa3;
+  }
+
+  .note {
+    margin-top: 14px;
+    font-size: 0.78rem;
+    color: rgba(255, 234, 244, 0.65);
+  }
+
+  .heart-icon {
+    font-size: 1.6rem;
+    margin-bottom: 14px;
+    animation: pulse 1.8s ease-in-out infinite;
+    display: inline-block;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.18); }
+  }
+
+  @media (max-width: 480px) {
+    .card { padding: 32px 20px; border-radius: 22px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="hearts" id="hearts"></div>
+
+  <main class="card">
+    <div class="heart-icon">❤️</div>
+
+    <h1>I’m Sorry, Khushi</h1>
+    <div class="subtitle">From my heart to yours</div>
+
+    <div class="message">
+      <p>
+        Khushi, I know I hurt you, and I’m truly sorry.
+        You mean so much to me, and the last thing I ever want is to make you feel unloved or unheard.
+      </p>
+      <p>
+        I’ve been thinking about everything, and I want to do better — not just with words,
+        but with actions. You deserve patience, honesty, and all the love I have.
+      </p>
+      <p>
+        I’m not asking you to forget. I’m asking for a chance to make things right,
+        because you are worth it. You always have been.
+      </p>
+      <p class="signature">Forever yours ❤️</p>
+    </div>
+
+    <div class="music-box">
+      <div class="music-label">🎵 Our song — press play</div>
+      <!-- Put your song file named song.mp3 in the same folder -->
+      <audio controls loop id="song">
+        <source src="song.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+      <div class="note">Tip: rename your song file to <b>song.mp3</b> and keep it beside this HTML file.</div>
+    </div>
+  </main>
+
+<script>
+  // Floating hearts
+  const heartsContainer = document.getElementById('hearts');
+  const heartSymbols = ['❤️', '💖', '💕', '💗', '💓', '🌸'];
+
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.fontSize = (16 + Math.random() * 24) + 'px';
+    heart.style.animationDuration = (8 + Math.random() * 10) + 's';
+    heart.style.animationDelay = Math.random() * 2 + 's';
+    heartsContainer.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 20000);
+  }
+
+  setInterval(createHeart, 450);
+  for (let i = 0; i < 12; i++) setTimeout(createHeart, i * 200);
+</script>
+</body>
+</html>
